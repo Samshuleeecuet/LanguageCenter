@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaEye,FaEyeSlash } from "react-icons/fa";
 import useDynamicTitle from '../../Hooks/DynamicTitle/useDynamicTitle';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const Register = () => {
+    const {createUserwithEmail,updateUserProfile} = useContext(AuthContext);
     useDynamicTitle('Register')
     const [showPassword, setShowPassword] = useState(false);
     const togglePasswordVisibility = ()=>{

@@ -4,6 +4,9 @@ import MainLayout from "../Layout/MainLayout";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Login/Register";
+import Instructors from "../Pages/Instructors/Instructors";
+import DashBoardLayout from "../Layout/DashBoardLayout";
+import DashBoard from "../Pages/DashBoard/DashBoard";
 
 const router = createBrowserRouter([
     {
@@ -22,9 +25,23 @@ const router = createBrowserRouter([
         {
             path: '/register',
             element: <Register/>
+        },
+        {
+            path: '/instructors',
+            element: <Instructors/>
         }
       ]
     },
+    {
+        path: '/dashboard',
+        element: <DashBoardLayout/>,
+        children: [
+            {
+                path: '/dashboard',
+                element: <DashBoard/>,
+            }
+        ]
+    }
   ]);
 
 
