@@ -16,7 +16,7 @@ const SliderSection = () => {
         }}
         navigation={true}
         modules={[Pagination, Navigation]}
-        className="mySwiper h-[500px]"
+        className="mySwiper lg:h-[500px]"
       >
         <SwiperSlide className="bg-gradient-to-r from-green-300 from-10% via-green-500 via-30% to-emerald-500 to-90% ...">
             <div className='lg:flex' >
@@ -25,8 +25,8 @@ const SliderSection = () => {
         learn foreign language like German</p>
             <p className='btn btn-outline text-white'>Explore German</p>
                     </div>
-                    <div className='mt-10 mr-10'>
-                        <ReactPlayer url='https://www.youtube.com/watch?v=5z-grdXP8B8' height='400px' />
+                    <div className='mt-10 mb-10 ml-10 lg:mr-10'>
+                        <ReactPlayer url='https://www.youtube.com/watch?v=5z-grdXP8B8' />
                     </div>
             </div>
         </SwiperSlide>
