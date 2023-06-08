@@ -1,14 +1,35 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle} from "react-icons/fa";
 import useDynamicTitle from '../../Hooks/DynamicTitle/useDynamicTitle';
+import { AuthContext } from '../../Provider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     useDynamicTitle('Login')
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const {signInwithEmail,loginwithGoogle}= useContext(AuthContext)
+    const [err,seterr]= useState('');
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/'
     const onSubmit = data => {
-        console.log(data)
+        seterr('')
+        signInwithEmail(data.email,data.password)
+            .then(result=>{
+                seterr('')
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'User login successfully',
+                    showConfirmButton: true
+                })
+                navigate(from,{replace:true});
+            })
+            .catch(err=>{
+                seterr(err.message)
+            })
     };
 
     return (
@@ -25,13 +46,13 @@ const Login = () => {
                <input className='border rounded-lg h-12 w-80 mb-4 pl-4 border-green-400' defaultValue="" placeholder='Enter Your Password' {...register("password",{required: true})} required />
                <br/>
                {
-                errors.password && <span className='text-red-500'>Password is required</span>
+                err && <span className='text-red-500'>Password is required</span>
                }
                <p className='pb-4'>Don't have an account? <Link className='link-hover text-green-700' to='/register'>Register</Link></p>
                
                <input className='btn btn-accent text-white' type="submit" value="Login" />
                <div className="divider">OR</div>
-               <div className="flex btn btn-accent justify-center h-12 rounded-box place-items-center text-white"><FaGoogle/> <span className='ml-2 font-bold'>Login with Google</span></div>
+               <div onClick={loginwithGoogle} className="flex btn btn-accent justify-center h-12 rounded-box place-items-center text-white"><FaGoogle/> <span className='ml-2 font-bold'>Login with Google</span></div>
            </form>
            </div>
         </div>

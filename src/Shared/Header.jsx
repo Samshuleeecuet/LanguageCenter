@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const Header = () => {
+    const {user,logOut} = useContext(AuthContext);
+    //console.log(user)
 
     const navLink = <>
     <li><NavLink to='/' className={({ isActive }) => (isActive ? 'active' : 'default')}>Home</NavLink></li>
     <li><NavLink to='/instructors' className={({ isActive }) => (isActive ? 'active' : 'default')}>Instructors</NavLink></li>
     <li><NavLink to='/classes' className={({ isActive }) => (isActive ? 'active' : 'default')}>Classes</NavLink></li>
-    <li><NavLink to='/dashboard' className={({ isActive }) => (isActive ? 'active' : 'default')}>Dashboard</NavLink></li>
-    <li><NavLink to='/login' className={({ isActive }) => (isActive ? 'active' : 'default')}>Login</NavLink></li>
+    {
+        user && <li><NavLink to='/dashboard' className={({ isActive }) => (isActive ? 'active' : 'default')}>Dashboard</NavLink></li>
+    }
+    {
+        !user && <li><NavLink to='/login' className={({ isActive }) => (isActive ? 'active' : 'default')}>Login</NavLink></li>
+    }
     
     </>
     return (
@@ -29,16 +36,18 @@ const Header = () => {
             {navLink}
             </ul>
         </div>
-        <div className="navbar-end mr-10">
-                <div className='hidden lg:block'>
-                <Link className='font-medium tracking-wide text-gray-700 transition-colors duration-200 btn btn-outline mr-4'>Log Out</Link>
-                </div>
-                <div className="avatar tooltip tooltip-bottom" data-tip='shakil'>
-                    <div className="w-14 rounded-full">
-                        <img src='' />
-                    </div>
+        {
+            user && <div className="navbar-end mr-10">
+            <div className='hidden lg:block'>
+            <Link onClick={logOut} className='font-medium tracking-wide text-gray-700 transition-colors duration-200 btn btn-outline mr-4'>Log Out</Link>
+            </div>
+            <div className="avatar tooltip tooltip-bottom z-20" data-tip={user.displayName}>
+                <div className="w-14 rounded-full">
+                    <img src={user.photoURL} />
                 </div>
             </div>
+        </div>
+        }
         </div>
     );
 };

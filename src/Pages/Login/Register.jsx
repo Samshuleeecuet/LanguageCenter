@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaEye,FaEyeSlash } from "react-icons/fa";
@@ -10,6 +10,7 @@ import { AuthContext } from '../../Provider/AuthProvider';
 const Register = () => {
     const {createUserwithEmail,updateUserProfile} = useContext(AuthContext);
     useDynamicTitle('Register')
+    const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const togglePasswordVisibility = ()=>{
         setShowPassword(!showPassword)
@@ -31,12 +32,17 @@ const Register = () => {
             .oneOf([yup.ref('password')],'Password does not match')
       });
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
     });
     
     const onSubmit = data => {
-        console.log(data)
+        createUserwithEmail(data.email,data.password)
+        .then((result)=>{
+            const user = result.user;
+            updateUserProfile(user,data.name,data.photourl)
+            navigate('/')
+        })
     };
     return (
         <div className='mt-14 lg:my-28'>

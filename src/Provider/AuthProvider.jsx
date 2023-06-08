@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState } from 'react';
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../Firebase/firebase.config';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 const auth = getAuth(app);
 const GoogleProvider = new GoogleAuthProvider();
 
@@ -29,15 +30,16 @@ const AuthProvider = ({children}) => {
                 title: 'Login successfully',
                 showConfirmButton: true
               })
+            window.location.href= 'http://localhost:5173/'
         })
         .catch(err=>{
             console.log(err)
         })
     }
 
-    const updateUserProfile = (user,name)=>{
+    const updateUserProfile = (user,name,photourl)=>{
         updateProfile(user,{
-            displayName:name
+            displayName:name, photoURL: photourl
         })
         .then(()=>{
             console.log('profile updated')
@@ -56,6 +58,7 @@ const AuthProvider = ({children}) => {
            // console.log(loggedUser)
             setUser(loggedUser)
             setLoading(false)
+            //console.log(loggedUser)
         })
         return ()=>{
             unsubscribe()
