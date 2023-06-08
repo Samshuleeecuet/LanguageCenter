@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaEye,FaEyeSlash } from "react-icons/fa";
+import useDynamicTitle from '../../Hooks/DynamicTitle/useDynamicTitle';
 
 const Register = () => {
+    useDynamicTitle('Register')
     const [showPassword, setShowPassword] = useState(false);
     const togglePasswordVisibility = ()=>{
         setShowPassword(!showPassword)
@@ -49,7 +51,7 @@ const Register = () => {
               
                <div className='flex'>
                <input className='border rounded-lg h-12 w-80 mb-4 pl-4 border-green-400' type={showPassword ? 'text' : 'password'} placeholder='Enter Your Password' {...register("password",{required: true})}  />
-               <span className='relative right-10 top-3 text-2xl' onClick={togglePasswordVisibility}>
+               <span className='relative right-10 top-3 text-green-500 text-2xl' onClick={togglePasswordVisibility}>
             {showPassword ? <FaEyeSlash /> : <FaEye />}</span>
                </div>
                <br/>
@@ -67,9 +69,9 @@ const Register = () => {
                {
                 errors.confirmpassword && <p className='text-red-500'>{errors.confirmpassword.message}</p>
                }
-               <p className='pb-4'>Don't have an account? <Link className='link-hover text-green-700' to='/register'>Register</Link></p>
+               <p className='pb-4'>Do have an account? <Link className='link-hover text-green-700' to='/login'>Login</Link></p>
                
-               <input className='btn btn-accent text-white' type="submit" value="Login" />
+               <input className='btn btn-accent text-white' type="submit" value="Register" />
            </form>
            </div>
         </div>
