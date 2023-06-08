@@ -32,9 +32,9 @@ const Login = () => {
                <div className="flex btn btn-accent justify-center h-12 rounded-box place-items-center text-white"><FaGoogle/> <span className='ml-2 font-bold'>Login with Google</span></div>
            </form>
            </div>
-</div>
-    </div>
         </div>
+    </div>
+</div>
     );
 };
 
