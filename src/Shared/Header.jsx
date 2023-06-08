@@ -12,7 +12,7 @@ const Header = () => {
     
     </>
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-green-300">
         <div className="navbar-start">
             <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -31,7 +31,7 @@ const Header = () => {
         </div>
         <div className="navbar-end mr-10">
                 <div className='hidden lg:block'>
-                <Link className='btn btn-primary mr-4'>Log Out</Link>
+                <Link className='font-medium tracking-wide text-gray-700 transition-colors duration-200 btn btn-outline mr-4'>Log Out</Link>
                 </div>
                 <div className="avatar tooltip tooltip-bottom" data-tip='shakil'>
                     <div className="w-14 rounded-full">
