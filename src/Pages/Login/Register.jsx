@@ -1,18 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { FaEye,FaEyeSlash } from "react-icons/fa";
 
 const Register = () => {
+    const [showPassword, setShowPassword] = useState(false);
+    const togglePasswordVisibility = ()=>{
+        setShowPassword(!showPassword)
+    }
     const schema = yup.object().shape({
+        email: yup
+            .string()
+            .required('Email is Required')
+        ,
         password: yup
           .string()
+          .required('Password is Required')
           .min(6, 'Password must be at least 6 characters')
           .matches(/[A-Z]/, 'Password must contain at least one capital letter')
           .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Password must contain at least one special character'),
+          confirmpassword: yup
+            .string()
+            .required('Confirm Password is Required')
+            .oneOf([yup.ref('password')],'Password does not match')
       });
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch, formState: { errors } } = useForm({
+        resolver: yupResolver(schema)
+    });
     
     const onSubmit = data => {
         console.log(data)
@@ -27,24 +44,28 @@ const Register = () => {
             <input className='border rounded-lg h-12 w-80 pl-4 mb-4 border-green-400' defaultValue="" type='text' placeholder='Enter Your Name' {...register("name",{required: true})} />
                <br/>
                
-               <input className='border rounded-lg h-12 w-80 pl-4 mb-4 border-green-400' defaultValue="" type='email' placeholder='Enter Your Email' {...register("email",{required: true})} required/>
+               <input className='border rounded-lg h-12 w-80 pl-4 mb-4 border-green-400' defaultValue="" type='email' placeholder='Enter Your Email' {...register("email",{required: true})} />
                <br/>
               
-               <input className='border rounded-lg h-12 w-80 mb-4 pl-4 border-green-400' defaultValue="" placeholder='Enter Your Password' {...register("password",{required: true},{pattern: /^[A-Z]+$/i })} required />
+               <div className='flex'>
+               <input className='border rounded-lg h-12 w-80 mb-4 pl-4 border-green-400' type={showPassword ? 'text' : 'password'} placeholder='Enter Your Password' {...register("password",{required: true})}  />
+               <span className='relative right-10 top-3 text-2xl' onClick={togglePasswordVisibility}>
+            {showPassword ? <FaEyeSlash /> : <FaEye />}</span>
+               </div>
                <br/>
 
-               <input className='border rounded-lg h-12 w-80 mb-4 pl-4 border-green-400' defaultValue="" placeholder='Enter Confirm Password' {...register("confirmpassword",{required: true})} required />
+               <input className='border rounded-lg h-12 w-80 mb-4 pl-4 border-green-400' type='password' defaultValue="" placeholder='Enter Confirm Password' {...register("confirmpassword",{required: true})} />
                <br/>
                <input className='border rounded-lg h-12 w-80 pl-4 mb-4 border-green-400' defaultValue="" type='text' placeholder='Enter PhotoUrl' {...register("photourl",{required: true})}/>
                <br/>
                {
-                (errors.password && errors.email) && <span className='text-red-500'>Email & Password is required</span>
+                errors.email && <p className='text-red-500'>{errors.email.message}</p>
                }
                {
-                errors.email && <span className='text-red-500'>Email is required</span>
+                errors.password && <p className='text-red-500'>{errors.password.message}</p>
                }
                {
-                errors.password && <span className='text-red-500'>Password is required</span>
+                errors.confirmpassword && <p className='text-red-500'>{errors.confirmpassword.message}</p>
                }
                <p className='pb-4'>Don't have an account? <Link className='link-hover text-green-700' to='/register'>Register</Link></p>
                
