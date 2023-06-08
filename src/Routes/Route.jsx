@@ -6,7 +6,10 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Login/Register";
 import Instructors from "../Pages/Instructors/Instructors";
 import DashBoardLayout from "../Layout/DashBoardLayout";
-import DashBoard from "../Pages/DashBoard/DashBoard";
+import MyCart from "../Pages/DashBoard/MyCart/MyCart";
+import PaymentHistory from "../Pages/DashBoard/PaymentHistory/PaymentHistory";
+import ManageUsers from "../Pages/DashBoard/Users/ManageUsers";
+import AddClass from "../Pages/DashBoard/AddClass/AddClass";
 
 const router = createBrowserRouter([
     {
@@ -33,13 +36,26 @@ const router = createBrowserRouter([
       ]
     },
     {
-        path: '/dashboard',
+        path: 'dashboard',
         element: <DashBoardLayout/>,
         children: [
             {
-                path: '/dashboard',
-                element: <DashBoard/>,
+                path: 'mycart',
+                element: <MyCart/>,
+            },
+            {
+                path: 'wallet',
+                element: <PaymentHistory/>
+            },
+            {
+                path: 'users',
+                element:<ManageUsers/>
+            },
+            {
+                path: 'addclass',
+                element:<AddClass/>
             }
+
         ]
     }
   ]);

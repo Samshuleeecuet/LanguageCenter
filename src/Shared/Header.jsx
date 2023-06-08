@@ -11,7 +11,7 @@ const Header = () => {
     <li><NavLink to='/instructors' className={({ isActive }) => (isActive ? 'active' : 'default')}>Instructors</NavLink></li>
     <li><NavLink to='/classes' className={({ isActive }) => (isActive ? 'active' : 'default')}>Classes</NavLink></li>
     {
-        user && <li><NavLink to='/dashboard' className={({ isActive }) => (isActive ? 'active' : 'default')}>Dashboard</NavLink></li>
+        user && <li><NavLink to='dashboard/mycart' className={({ isActive }) => (isActive ? 'active' : 'default')}>Dashboard</NavLink></li>
     }
     {
         !user && <li><NavLink to='/login' className={({ isActive }) => (isActive ? 'active' : 'default')}>Login</NavLink></li>
