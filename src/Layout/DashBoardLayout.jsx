@@ -1,14 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { FaCartPlus, FaHome, FaPlusCircle, FaUser, FaWallet } from "react-icons/fa";
-import { AuthContext } from '../Provider/AuthProvider';
+import useAuth from '../Hooks/useAuth';
+import useAdmin from '../Hooks/useAdmin';
 const DashBoardLayout = () => {
-    const {user,logOut} = useContext(AuthContext);
+    const {user,logOut} = useAuth();
 
     // TO DO 
-    const isAdmin = true;
-
-
+    // const isAdmin = true;
+    const [isAdmin] = useAdmin()
+    const {Admin , Instructor ,Student} = isAdmin || [];
+    console.log(Admin , Instructor ,Student)
     return (
         <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />

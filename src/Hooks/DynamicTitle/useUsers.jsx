@@ -16,5 +16,4 @@ const useUsers = () => {
     })
     return [users,refetch,isLoading]
 };
-
 export default useUsers;
