@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 import Footer from '../Shared/Footer';
 import { InfinitySpin } from 'react-loader-spinner'
 
+
 const MainLayout = () => {
     const [Loader,setLoader]= useState(true);
     

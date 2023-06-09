@@ -36,7 +36,7 @@ const Login = () => {
         loginwithGoogle()
         .then(result=>{
             const user = result.user;
-            const userData = {email:user.email,name:user.displayName,role:'Student'}
+            const userData = {email:user.email,name:user.displayName,photourl:user.photoURL,role:'Student'}
             fetch(`http://localhost:5000/users`,
             {
                 method: 'POST',
