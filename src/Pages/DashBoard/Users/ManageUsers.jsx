@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 const ManageUsers = () => {
     const [users,refetch,] = useUsers()
     useDynamicTitle('All Users')
+    
     //console.log(users)
     const handleRole = (id,role)=>{
         console.log(id,role)
@@ -47,7 +48,7 @@ const ManageUsers = () => {
                 </thead>
                 <tbody>
                     {
-                        users.map((user,index)=><tr key={user._id}>
+                        users?.map((user,index)=><tr key={user._id}>
                             <th>{index+1}</th>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
