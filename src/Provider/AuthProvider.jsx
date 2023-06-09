@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../Firebase/firebase.config';
 import Swal from 'sweetalert2';
@@ -20,26 +20,8 @@ const AuthProvider = ({children}) => {
     }
     const loginwithGoogle = () =>{
         setLoading(true);
-        signInWithPopup(auth, GoogleProvider)
-        .then(result=>{
-            const user = result.user;
-            const userData = {email:user.email,role:'Instructor'}
-            fetch(`http://localhost:5000/users`,
-            {
-                method: 'POST',
-                headers:{
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(userData)
-            })
-            .then(res=> res.json())
-            .then(data=> {
-            })
-            window.location.href= 'http://localhost:5173/'
-        })
-        .catch(err=>{
-            console.log(err)
-        })
+        return signInWithPopup(auth, GoogleProvider)
+        
     }
 
     const updateUserProfile = (user,name,photourl)=>{

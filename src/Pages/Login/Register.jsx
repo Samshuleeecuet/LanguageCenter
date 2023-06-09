@@ -41,7 +41,7 @@ const Register = () => {
         .then((result)=>{
             const user = result.user;
             updateUserProfile(user,data.name,data.photourl)
-            const userData = {email:data.email,role:'Admin'}
+            const userData = {email:data.email,role:'Student'}
             fetch(`http://localhost:5000/users`,
             {
                 method: 'POST',

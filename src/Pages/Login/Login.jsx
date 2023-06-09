@@ -32,6 +32,29 @@ const Login = () => {
             })
     };
 
+    const handlegoogleLogin = ()=>{
+        loginwithGoogle()
+        .then(result=>{
+            const user = result.user;
+            const userData = {email:user.email,role:'Student'}
+            fetch(`http://localhost:5000/users`,
+            {
+                method: 'POST',
+                headers:{
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            })
+            .then(res=> res.json())
+            .then(data=> {
+                navigate(from,{replace:true})
+            })
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
+
     return (
         <div className='mt-14 lg:my-28'>
             <h2 className='text-center text-2xl font-extrabold pb-10 '>Login Page</h2>
@@ -52,7 +75,7 @@ const Login = () => {
                
                <input className='btn btn-accent text-white' type="submit" value="Login" />
                <div className="divider">OR</div>
-               <div onClick={loginwithGoogle} className="flex btn btn-accent justify-center h-12 rounded-box place-items-center text-white"><FaGoogle/> <span className='ml-2 font-bold'>Login with Google</span></div>
+               <div onClick={handlegoogleLogin} className="flex btn btn-accent justify-center h-12 rounded-box place-items-center text-white"><FaGoogle/> <span className='ml-2 font-bold'>Login with Google</span></div>
            </form>
            </div>
         </div>
