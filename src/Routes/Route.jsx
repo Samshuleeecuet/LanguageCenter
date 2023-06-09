@@ -11,6 +11,7 @@ import PaymentHistory from "../Pages/DashBoard/PaymentHistory/PaymentHistory";
 import ManageUsers from "../Pages/DashBoard/Users/ManageUsers";
 import AddClass from "../Pages/DashBoard/AddClass/AddClass";
 import ManageClasses from "../Pages/DashBoard/ManageClasses/ManageClasses";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
     },
     {
         path: 'dashboard',
-        element: <DashBoardLayout/>,
+        element: <PrivateRoute><DashBoardLayout/></PrivateRoute>,
         children: [
             {
                 path: 'mycart',

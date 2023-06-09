@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 
-const EachClass = ({eachclass}) => {
-    const [approved,setApproved] = useState(false)
-    const [deny,setDeny] = useState(false)
-    const [feed,setFeedback] = useState(false)
+
+const EachClass = ({eachclass,handleApproved,handleDeny}) => {
     const {_id,classname,classimage,availableseat,enrollstudent,feedback,instructoremail,instructorname,price,status}= eachclass || {}
     //console.log(eachclass)
-    const handleApproved = id =>{
-        console.log(id)
-    }
+    
 
     return (
         <tr>
@@ -41,9 +37,9 @@ const EachClass = ({eachclass}) => {
                 <div className='font-medium text-xs'>{status}</div>
             </th>
             <th>
-            <button disabled={approved} onClick={()=>handleApproved(_id)} className="btn btn-success">Approved</button>
-            <button onClick={()=>handleDenied(_id)} className="btn btn-error">Denied</button>
-            <button className="btn btn-warning">Feedback</button>
+            <button disabled={(status == 'Approved'? true:false)||(status == 'Denied'? true:false)} onClick={()=>handleApproved(_id)} className="btn btn-success">Approved</button>
+            <button disabled={(status == 'Approved'? true:false)||(status == 'Denied'? true:false)} onClick={()=>handleDeny(_id)} className="btn btn-error">Denied</button>
+            <button onClick={()=>handleDeny(_id)} disabled={(status == 'Approved'? true:false)} className="btn btn-warning">Feedback</button>
             </th>
         
             
