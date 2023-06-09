@@ -51,7 +51,7 @@ const router = createBrowserRouter([
                 element: <PaymentHistory/>
             },
             {
-                path: 'users',
+                path: 'allusers',
                 element:<ManageUsers/>
             },
             {

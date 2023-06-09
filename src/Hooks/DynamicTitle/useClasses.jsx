@@ -10,7 +10,6 @@ const useClasses = ()=>{
 })
 return [classes,refetch,isLoading]
 
-
 };
 
 export default useClasses;
