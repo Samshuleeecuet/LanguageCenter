@@ -41,7 +41,19 @@ const Register = () => {
         .then((result)=>{
             const user = result.user;
             updateUserProfile(user,data.name,data.photourl)
-            navigate('/')
+            const userData = {email:data.email,role:'Admin'}
+            fetch(`http://localhost:5000/users`,
+            {
+                method: 'POST',
+                headers:{
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            })
+            .then(res=> res.json())
+            .then(data=> {
+                navigate('/')
+            })
         })
     };
     return (

@@ -12,6 +12,7 @@ import ManageUsers from "../Pages/DashBoard/Users/ManageUsers";
 import AddClass from "../Pages/DashBoard/AddClass/AddClass";
 import ManageClasses from "../Pages/DashBoard/ManageClasses/ManageClasses";
 import PrivateRoute from "./PrivateRoute";
+import AddClassList from "../Pages/DashBoard/AddClassList/AddClassList";
 
 const router = createBrowserRouter([
     {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
             {
                 path: 'manageclasses',
                 element:<ManageClasses/>
+            },
+            {
+                path: 'addedclasses',
+                element: <AddClassList/>
             }
 
 

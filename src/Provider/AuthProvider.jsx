@@ -2,7 +2,6 @@ import React, { createContext, useEffect, useState } from 'react';
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../Firebase/firebase.config';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
 const auth = getAuth(app);
 const GoogleProvider = new GoogleAuthProvider();
 
@@ -24,12 +23,18 @@ const AuthProvider = ({children}) => {
         signInWithPopup(auth, GoogleProvider)
         .then(result=>{
             const user = result.user;
-            Swal.fire({
-                position: 'top-center',
-                icon: 'success',
-                title: 'Login successfully',
-                showConfirmButton: true
-              })
+            const userData = {email:user.email,role:'Instructor'}
+            fetch(`http://localhost:5000/users`,
+            {
+                method: 'POST',
+                headers:{
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            })
+            .then(res=> res.json())
+            .then(data=> {
+            })
             window.location.href= 'http://localhost:5173/'
         })
         .catch(err=>{

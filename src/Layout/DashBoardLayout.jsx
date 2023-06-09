@@ -26,10 +26,11 @@ const DashBoardLayout = () => {
                 <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'default')} to='/dashboard/wallet'><FaWallet/> Payment History </NavLink></li>
                 <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'default')} to='/dashboard/users'><FaUser/> Manage Users </NavLink></li>
                 <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'default')} to='/dashboard/manageclasses'><FaUser/> Manage Classes</NavLink></li>
+                <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'default')} to='/dashboard/addedclasses'><FaUser/>Added Classed</NavLink></li>
                 <div className='divider'></div>
-                <li><Link to='/'>Home</Link></li>
-                <li><Link to='/instructors'>Instructors</Link></li>
-                <li><Link to='/classes'>Classes</Link></li>
+                <li><Link className='font-medium tracking-wide text-gray-700 transition-colors duration-200 mr-4' to='/'>Home</Link></li>
+                <li><Link className='font-medium tracking-wide text-gray-700 transition-colors duration-200 mr-4' to='/instructors'>Instructors</Link></li>
+                <li><Link className='font-medium tracking-wide text-gray-700 transition-colors duration-200 mr-4' to='/classes'>Classes</Link></li>
                 <li><Link onClick={logOut} className='font-medium tracking-wide text-gray-700 transition-colors duration-200 mr-4'>Log Out</Link></li>
             </ul>
             
