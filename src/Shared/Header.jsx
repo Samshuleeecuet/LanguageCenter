@@ -7,11 +7,10 @@ const Header = () => {
     const {user,logOut} = useContext(AuthContext);
     const [isAdmin] = useAdmin()
     const {Admin , Instructor ,Student} = isAdmin || [];
-
     const navLink = <>
     <li ><NavLink to='/' className={({ isActive }) => (isActive ? 'active' : 'default')}>Home</NavLink></li>
     <li className='mt-2 lg:mt-0'><NavLink to='/instructors' className={({ isActive }) => (isActive ? 'active' : 'default')}>Instructors</NavLink></li>
-    { Student &&
+    { user &&
         <li className='mt-2 lg:mt-0'><NavLink to='/classes' className={({ isActive }) => (isActive ? 'active' : 'default')}>Classes</NavLink></li>
     } 
     {

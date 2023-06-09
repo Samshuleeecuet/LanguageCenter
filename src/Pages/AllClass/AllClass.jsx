@@ -1,0 +1,69 @@
+import React from 'react';
+import { useQuery } from '@tanstack/react-query'
+import EachClass from './EachClass';
+import { json } from 'react-router-dom';
+import useAuth from '../../Hooks/useAuth';
+import Swal from 'sweetalert2';
+
+const AllClass = () => {
+    const {user} = useAuth();
+    const { data: classes = [],refetch,isLoading, isError, error } = useQuery({
+      queryKey: ['classes'],
+      queryFn: async ()=>{
+          const response = await fetch(`http://localhost:5000/allclasses`)
+          return response.json()
+      }
+  })
+  const handleAddtoCart = (data)=>{
+    const classId = data._id
+    delete data._id;
+    fetch('http://localhost:5000/addtocart',{
+        method: 'POST',
+        headers:{
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            ...data,
+            classId,
+            purchasedBy: user?.email,
+            purchase : false
+
+        })
+    })
+    .then(res=> res.json())
+    .then(data=> {
+        if(data.message){
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: `${data.message}`,
+                width: 400,
+                showConfirmButton: false,
+                timer: 1500
+              })
+        }
+       if(data.insertedId){
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Your Class has been Added to cart',
+            showConfirmButton: false,
+            width: 400,
+            timer: 1500
+          })
+       }
+    })
+  }
+    return (
+        <div className='pt-5 pb-5 pl-5 pr-5 bg-green-400'>
+
+            <div className='grid grid-cols-3'>
+                {
+                    classes.map(eachClass=> <EachClass handleAddtoCart={handleAddtoCart} eachClass={eachClass} key={eachClass._id} />)
+                }
+            </div>
+        </div>
+    );
+};
+
+export default AllClass;

@@ -9,7 +9,8 @@ const AddClass = () => {
     const [, refetch,]= useClasses()
     const onSubmit = formData => {
         formData.status = 'pending'
-        formData.enrollstudent = '0'
+        formData.price = parseInt(formData.price)
+        formData.enrollstudent = 0
         formData.feedback = ''
             fetch(`http://localhost:5000/classes`,
             {

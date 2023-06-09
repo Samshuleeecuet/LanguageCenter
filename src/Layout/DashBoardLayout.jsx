@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
-import { FaCartPlus, FaHome, FaPlusCircle, FaUser, FaWallet } from "react-icons/fa";
+import { FaCartPlus, FaClipboard, FaHome, FaOldRepublic, FaPlusCircle, FaUser, FaWallet } from "react-icons/fa";
 import useAuth from '../Hooks/useAuth';
 import useAdmin from '../Hooks/useAdmin';
 const DashBoardLayout = () => {
@@ -42,6 +42,8 @@ const DashBoardLayout = () => {
                 }
                 {
                     Student && <>
+                    <li className='mb-2'><NavLink className={({ isActive }) => (isActive ? 'active' : 'default')} to='/dashboard/studentcart'><FaClipboard/> Selected Classes </NavLink></li>
+                    <li className='mb-2'><NavLink className={({ isActive }) => (isActive ? 'active' : 'default')} to='/dashboard/enroll'><FaOldRepublic/> Enroll Classes </NavLink></li>
                     <li className='mb-2'><NavLink className={({ isActive }) => (isActive ? 'active' : 'default')} to='/dashboard/wallet'><FaWallet/> Payment History </NavLink></li>
                     </>
 
