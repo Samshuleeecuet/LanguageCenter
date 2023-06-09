@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useUsers from '../../../Hooks/DynamicTitle/useUsers';
 import useDynamicTitle from '../../../Hooks/DynamicTitle/useDynamicTitle';
 import { FaTrashAlt } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const ManageUsers = () => {
     const [users,refetch,] = useUsers()
     useDynamicTitle('All Users')
-    console.log(users)
+    //console.log(users)
+    const handleRole = (id,role)=>{
+        console.log(id,role)
+        fetch(`http://localhost:5000/users/admin?id=${id}&role=${role}`,{
+            method: 'PATCH'
+        })
+        .then(res=> res.json())
+        .then(data=>{
+            if(data.modifiedCount>0){
+                refetch()
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: `Make ${role} Successfully`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+            }
+        })
+    }
     const handleDelete = id =>{
         console.log(id)
     }
@@ -44,20 +64,20 @@ const ManageUsers = () => {
                             <td>
                                 {
                                     user.role === 'Admin' && <>
-                                    <button className='btn btn-accent mr-2'>Instructor</button>
-                                    <button className='btn btn-neutral'>Student</button>
+                                    <button onClick={()=>handleRole(user._id,'Instructor')} className='btn btn-accent mr-2'>Instructor</button>
+                                    <button onClick={()=>handleRole(user._id,'Student')} className='btn btn-neutral'>Student</button>
                                     </>
                                 }
                                 {
                                     user.role === 'Instructor' && <>
-                                    <button className='btn btn-accent mr-2'>Admin</button>
-                                    <button className='btn btn-neutral'>Student</button>
+                                    <button onClick={()=>handleRole(user._id,'Admin')}  className='btn btn-accent mr-2'>Admin</button>
+                                    <button onClick={()=>handleRole(user._id,'Student')} className='btn btn-neutral'>Student</button>
                                     </>
                                 }
                                 {
                                     user.role === 'Student' && <>
-                                    <button className='btn btn-accent mr-2'>Admin</button>
-                                    <button className='btn btn-neutral'>Instructor</button>
+                                    <button onClick={()=>handleRole(user._id,'Admin')} className='btn btn-accent mr-2'>Admin</button>
+                                    <button onClick={()=>handleRole(user._id,'Instructor')}  className='btn btn-neutral'>Instructor</button>
                                     </>
                                 }
                             </td>
