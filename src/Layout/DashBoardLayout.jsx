@@ -11,11 +11,12 @@ const DashBoardLayout = () => {
         </div>
         <div className="drawer-side">
             <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
-            <ul className="menu p-4 w-80 h-full bg-green-300 text-base-content">
+            <ul className="menu p-4 w-60 h-full bg-green-300 text-base-content">
                 <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'default')} to='/dashboard/mycart'><FaCartPlus/> Manage Classes</NavLink></li>
                 <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'default')} to='/dashboard/addclass'><FaPlusCircle/>Add A Class</NavLink></li>
                 <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'default')} to='/dashboard/wallet'><FaWallet/> Payment History </NavLink></li>
                 <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'default')} to='/dashboard/users'><FaUser/> Manage Users </NavLink></li>
+                <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'default')} to='/dashboard/manageclasses'><FaUser/> Manage Classes</NavLink></li>
                 <div className='divider'></div>
                 <li><Link to='/'>Home</Link></li>
                 <li><Link to='/instructors'>Instructors</Link></li>

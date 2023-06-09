@@ -1,12 +1,37 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useForm } from "react-hook-form";
+import useClasses from '../../../Hooks/DynamicTitle/useClasses';
 import { AuthContext } from '../../../Provider/AuthProvider';
+import Swal from 'sweetalert2';
 const AddClass = () => {
+    const {user} = useContext(AuthContext)
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const {user} = useContext(AuthContext);
-    const onSubmit = data => {
-        data.status = 'pending'
-        console.log(data)
+    const [, refetch,]= useClasses()
+    const onSubmit = formData => {
+        formData.status = 'pending'
+        formData.enrollstudent = '0'
+        formData.feedback = ''
+            fetch(`http://localhost:5000/classes`,
+            {
+                method: 'POST',
+                headers:{
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(res=> res.json())
+            .then(data=> {
+                if(data.insertedId){
+                    refetch();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Class Aproved Pending',
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
+                }
+            })
     }
     return (
         <div className='min-h-screen'>
