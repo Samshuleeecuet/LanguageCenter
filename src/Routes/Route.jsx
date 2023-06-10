@@ -16,6 +16,7 @@ import AddClassList from "../Pages/DashBoard/AddClassList/AddClassList";
 import AllClass from "../Pages/AllClass/AllClass";
 import StudentClass from "../Pages/DashBoard/StudentClass/StudentClass";
 import EnrollClass from "../Pages/DashBoard/EnrollClass/EnrollClass";
+import Payment from "../Pages/DashBoard/Payment/Payment";
 
 const router = createBrowserRouter([
     {
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
             {
                 path:'enroll',
                 element: <EnrollClass/>
+            },
+            {
+                path: 'payment/:classid',
+                element: <Payment/>
             }
 
         ]

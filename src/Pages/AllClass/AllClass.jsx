@@ -6,32 +6,40 @@ import useAuth from '../../Hooks/useAuth';
 import Swal from 'sweetalert2';
 
 const AllClass = () => {
-    const {user} = useAuth();
-    const { data: classes = [],refetch,isLoading, isError, error } = useQuery({
-      queryKey: ['classes'],
-      queryFn: async ()=>{
-          const response = await fetch(`http://localhost:5000/allclasses`)
-          return response.json()
-      }
-  })
+    const {user,loading} = useAuth();
+    const token= localStorage.getItem("access-token")
+            const { data: classes = [],refetch,isLoading, isError, error } = useQuery({
+            queryKey: ['classes'],
+            queryFn: async ()=>{
+                const response = await fetch(`http://localhost:5000/allclasses`,{
+                  headers :{
+                      authorization: `bearer ${token}`
+          }
+      })
+        return response.json()
+    }
+    })
   const handleAddtoCart = (data)=>{
     const classId = data._id
     delete data._id;
+    const token= localStorage.getItem("access-token")
     fetch('http://localhost:5000/addtocart',{
         method: 'POST',
         headers:{
-            'content-type': 'application/json'
+            'content-type': 'application/json',
+            authorization: `bearer ${token}`
         },
         body: JSON.stringify({
             ...data,
             classId,
             purchasedBy: user?.email,
-            purchase : false
+            purchase : 'false'
 
         })
     })
     .then(res=> res.json())
     .then(data=> {
+        refetch()
         if(data.message){
             Swal.fire({
                 position: 'top-end',
@@ -59,7 +67,7 @@ const AllClass = () => {
 
             <div className='grid grid-cols-3'>
                 {
-                    classes.map(eachClass=> <EachClass handleAddtoCart={handleAddtoCart} eachClass={eachClass} key={eachClass._id} />)
+                    classes.map((eachClass,index)=> <EachClass handleAddtoCart={handleAddtoCart} eachClass={eachClass} key={index} />)
                 }
             </div>
         </div>

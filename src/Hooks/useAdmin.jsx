@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../Provider/AuthProvider';
 
 const useAdmin = () => {
-    const {user} = useContext(AuthContext)
+    const {user,loading} = useContext(AuthContext)
     console.log('Use Admin', user?.email)
     const token= localStorage.getItem("access-token")
     const {data: isAdmin,isAdminLoading}= useQuery({
