@@ -1,19 +1,23 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../Hooks/useAuth';
-import axios from 'axios';
+import useEnrolledClass from '../../../Hooks/useEnrolledClass';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 
-const CheckOut = ({price,cart}) => {
+const CheckOut = ({price,cart,enrollstudent,availableseat}) => {
     const {user} = useAuth()
     const stripe = useStripe();
+    const navigate = useNavigate();
     const elements = useElements();
+    const [, refetch] = useEnrolledClass();
     const token= localStorage.getItem("access-token")
     const [err,setErr] = useState('');
     const [clientSecret, setClientSecret] = useState('');
     const [process, setprocess] = useState(false);
     const [transactionId, setTransactionId] = useState('');
-    console.log(price,cart)
+    console.log(price,cart.purchase)
     useEffect(()=>{
         if(price>0){
             fetch('http://localhost:5000/create-payment-intent',{
@@ -79,10 +83,12 @@ const CheckOut = ({price,cart}) => {
             setTransactionId(paymentIntent.id);
             const payment = {
                 email: user?.email,
-                transactionId: transactionId,
+                transactionId: paymentIntent.id,
                 price,
+                classname: cart.classname,
+                instructorname: cart.instructorname,
                 date: new Date(),
-                cartItems: cart.classId
+                classId: cart.classId
             }
             fetch('http://localhost:5000/payments',{
                 method: 'POST',
@@ -90,14 +96,49 @@ const CheckOut = ({price,cart}) => {
                 'content-type': 'application/json',
                 authorization: `bearer ${token}`
                 },
-                body: JSON.stringify({payment})
+                body: JSON.stringify(payment)
                 })
                 .then(res=> res.json())
                 .then(data=> {
-                  console.log(data);
                 if(data.insertedId){
+                  refetch()
                     console.log('Payment Successfull')
-                    
+                    fetch(`http://localhost:5000/carts/${cart.classId}`,{
+                      method: 'PATCH',
+                      headers:{
+                        'content-type': 'application/json',
+                        authorization: `bearer ${token}`
+                      },
+                      body: JSON.stringify({purchase: 'true'})
+                    })
+                    .then(res=> res.json())
+                    .then(data=> console.log('Cart Status Updated' ,data))
+
+                    fetch(`http://localhost:5000/updateclass/${cart.classId}`,{
+                      method: 'PATCH',
+                      headers:{
+                        'content-type': 'application/json',
+                        authorization: `bearer ${token}`
+                      },
+                      body: JSON.stringify({enrollstudent: enrollstudent+1 , availableseat: availableseat-1})
+                    })
+                    .then(res=> res.json())
+                    .then(data=> {
+                      console.log('Updata Class data',data)
+                      if(data.modifiedCount>0){
+                        refetch()
+                      Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Your Class has been Added to cart',
+                        showConfirmButton: false,
+                        width: 400,
+                        timer: 1500
+                      })
+                      navigate('/dashboard/enroll')
+                    }
+                    })
+
                 }
             })
             // axios.post('http://localhost:5000/payments',payment)

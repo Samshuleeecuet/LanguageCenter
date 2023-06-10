@@ -4,22 +4,12 @@ import { useQuery } from '@tanstack/react-query';
 import { FaBookReader, FaTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
+import useSelectedClass from '../../../Hooks/DynamicTitle/useSelectedClass';
 
 const StudentClass = () => {
-    const {user,loading} = useAuth()
-    const token= localStorage.getItem("access-token")
-  const { data: carts = [],refetch,isLoading, isError, error } = useQuery({
-    queryKey: ['carts'],
-    enabled: !loading,
-    queryFn: async ()=>{
-        const response = await fetch(`http://localhost:5000/carts/?email=${user?.email}&purchase=false`,{
-            headers :{
-                authorization: `bearer ${token}`
-            }
-        })
-        return response.json()
-    }
-})
+    
+    const [carts,refetch] = useSelectedClass()
+    
 const handleDelete = (id)=>{
     fetch(`http://localhost:5000/carts/${id}`,{
         method: 'DELETE'

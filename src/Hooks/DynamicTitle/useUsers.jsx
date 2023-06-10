@@ -5,7 +5,7 @@ import { AuthContext } from '../../Provider/AuthProvider';
 const useUsers = () => {
     const {user,loading} = useContext(AuthContext)
     const token= localStorage.getItem("access-token")
-    //console.log(token)
+    console.log(user?.email)
     const { data: users = [],refetch,isLoading, isError, error } = useQuery({
         queryKey: ['users',user?.email],
         enabled: !loading,
