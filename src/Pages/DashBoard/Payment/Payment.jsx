@@ -2,9 +2,9 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import CheckOutForm from './CheckOutForm';
 import useAuth from '../../../Hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
+import CheckOut from './CheckOut';
 
 const stripePromise = loadStripe(import.meta.env.VITE_Paymnet_Gateway_PK);
 const Payment = () => {
@@ -22,11 +22,13 @@ const Payment = () => {
         return response.json()
     }
 })
+const price = parseFloat(carts.price);
+console.log(carts,price)
     return (
         <div>
             <p className='text-3xl mb-5 font-extrabold'>Payment Gateway</p>
-            <Elements price={carts.price} stripe={stripePromise}>
-                <CheckOutForm/>
+            <Elements stripe={stripePromise}>
+                <CheckOut cart={carts} price={price}/>
             </Elements>
         </div>
     );
