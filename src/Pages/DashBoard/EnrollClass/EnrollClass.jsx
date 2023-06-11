@@ -7,8 +7,8 @@ const EnrollClass = () => {
     const [enrollCart,refetch] = useEnrolledClass();
     console.log(enrollCart)
     return (
-        <div>
-            <div className=' w-full'>
+        <div className='w-full ml-5'>
+            <div className='w-full'>
             <div className="overflow-x-auto">
             <table className="table">
                 {/* head */}

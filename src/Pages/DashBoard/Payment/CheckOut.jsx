@@ -100,21 +100,23 @@ const CheckOut = ({price,cart,enrollstudent,availableseat}) => {
                 })
                 .then(res=> res.json())
                 .then(data=> {
-                if(data.insertedId){
+                if(data.insertedId>0){
                   refetch()
                     console.log('Payment Successfull')
-                    fetch(`http://localhost:5000/carts/${cart.classId}`,{
-                      method: 'PATCH',
+                  }})
+
+                  fetch(`http://localhost:5000/carts/${cart.classId}`,{
+                      method: 'PUT',
                       headers:{
                         'content-type': 'application/json',
                         authorization: `bearer ${token}`
                       },
-                      body: JSON.stringify({purchase: 'true'})
+                      body: JSON.stringify({purchase: 'true',email: user?.email})
                     })
                     .then(res=> res.json())
-                    .then(data=> console.log('Cart Status Updated' ,data))
-
-                    fetch(`http://localhost:5000/updateclass/${cart.classId}`,{
+                    .then(data=> {
+                      console.log('Cart Status Updated' ,data)
+                      fetch(`http://localhost:5000/updateclass/${cart.classId}`,{
                       method: 'PATCH',
                       headers:{
                         'content-type': 'application/json',
@@ -124,23 +126,22 @@ const CheckOut = ({price,cart,enrollstudent,availableseat}) => {
                     })
                     .then(res=> res.json())
                     .then(data=> {
+                      refetch()
                       console.log('Updata Class data',data)
                       if(data.modifiedCount>0){
-                        refetch()
                       Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Your Class has been Added to cart',
+                        title: 'Enrolled Successfully',
                         showConfirmButton: false,
                         width: 400,
                         timer: 1500
                       })
-                      navigate('/dashboard/enroll')
+                      navigate('/dashboard/mycart')
                     }
-                    })
+                    })})
 
-                }
-            })
+                    
             // axios.post('http://localhost:5000/payments',payment)
             // .then(res=>{
             //     console.log(res.data);

@@ -1,9 +1,12 @@
 import React from 'react';
 import { FaChalkboardTeacher, FaMoneyCheck, FaUserTie } from 'react-icons/fa';
 import useAdmin from '../../Hooks/useAdmin';
+import useAuth from '../../Hooks/useAuth';
+import { Link } from 'react-router-dom';
 
 const EachClass = ({eachClass,handleAddtoCart}) => {
     const [isAdmin] = useAdmin()
+    const {user} = useAuth()
     const {Admin , Instructor ,Student} = isAdmin || [];
     const {availableseat,classimage,classname,instructorname,price} = eachClass || {}
     const available = availableseat;
@@ -17,7 +20,7 @@ const EachClass = ({eachClass,handleAddtoCart}) => {
                         <p className='flex items-center'><FaMoneyCheck className='text-3xl mr-4'/><span className='text-lg mr-2'>Price : $</span> {price}</p>
                         <div className="card-actions justify-end">
                         {
-                            (Admin || Instructor || (available<1)) ? <button disabled className="btn btn-accent bg-green-600 text-white">Select</button>: <button onClick={()=>handleAddtoCart(eachClass)} className="btn btn-accent bg-green-600 text-white">Select</button>
+                           user?  (Admin || Instructor || (available<1)) ? <button disabled className="btn btn-accent bg-green-600 text-white">Select</button>: <button onClick={()=>handleAddtoCart(eachClass)} className="btn btn-accent bg-green-600 text-white">Select</button>:<Link className='btn bg-red-400' to='/login'>Login First to Select</Link>
                         }
                         </div>
                     </div>

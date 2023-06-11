@@ -16,7 +16,7 @@ const ErrorPage = () => {
         <div className='max-w-md text-center'>
           <Link
             to='/'
-            className='px-8 py-3 font-semibold rounded bg-blue-200 text-gray-900'
+            className='px-8 py-3 font-semibold rounded bg-green-400 text-gray-900'
           >
             Go to homepage
           </Link>

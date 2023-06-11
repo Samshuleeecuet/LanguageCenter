@@ -10,6 +10,7 @@ const AddClass = () => {
     const onSubmit = formData => {
         formData.status = 'pending'
         formData.price = parseInt(formData.price)
+        formData.instructorimage = user.photoURL
         formData.enrollstudent = '0'
         formData.feedback = ''
             fetch(`http://localhost:5000/classes`,

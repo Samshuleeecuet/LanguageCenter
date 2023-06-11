@@ -10,11 +10,12 @@ const Header = () => {
     const navLink = <>
     <li ><NavLink to='/' className={({ isActive }) => (isActive ? 'active' : 'default')}>Home</NavLink></li>
     <li className='mt-2 lg:mt-0'><NavLink to='/instructors' className={({ isActive }) => (isActive ? 'active' : 'default')}>Instructors</NavLink></li>
-    { user &&
-        <li className='mt-2 lg:mt-0'><NavLink to='/classes' className={({ isActive }) => (isActive ? 'active' : 'default')}>Classes</NavLink></li>
-    } 
+    <li className='mt-2 lg:mt-0'><NavLink to='/classes' className={({ isActive }) => (isActive ? 'active' : 'default')}>Classes</NavLink></li>
     {
-        user && <li className='mt-2 lg:mt-0'><NavLink to='dashboard/mycart' className={({ isActive }) => (isActive ? 'active' : 'default')}>Dashboard</NavLink></li>
+        user && <>
+        <li className='mt-2 lg:mt-0'><NavLink to='dashboard/mycart' className={({ isActive }) => (isActive ? 'active' : 'default')}>Dashboard</NavLink></li>
+        </>
+
     }
     {
         !user && <li className='mt-2 lg:mt-0'><NavLink to='/login' className={({ isActive }) => (isActive ? 'active' : 'default')}>Login</NavLink></li>

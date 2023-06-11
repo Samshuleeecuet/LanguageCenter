@@ -65,7 +65,7 @@ const AllClass = () => {
     return (
         <div className='pt-5 pb-5 pl-5 pr-5 bg-green-400'>
 
-            <div className='grid grid-cols-3'>
+            <div className='grid grid-cols-3 gap-4'>
                 {
                     classes.map((eachClass,index)=> <EachClass handleAddtoCart={handleAddtoCart} eachClass={eachClass} key={index} />)
                 }

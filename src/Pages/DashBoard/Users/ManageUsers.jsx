@@ -28,6 +28,8 @@ const ManageUsers = () => {
             }
         })
     }
+
+    // TO DO delete user
     const handleDelete = id =>{
         console.log(id)
     }

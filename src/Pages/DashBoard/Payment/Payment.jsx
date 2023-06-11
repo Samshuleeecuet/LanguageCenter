@@ -29,6 +29,13 @@ const price = parseFloat(carts.price);
 const enrollstudent = parseInt(updatedCart[0]?.enrollstudent)
 const availableseat = parseInt(updatedCart[0]?.availableseat)
 console.log(carts,price,enrollstudent,availableseat)
+    if(availableseat<1){
+        return(
+            <div>
+                <p>No Availableseat</p>
+            </div>
+        )
+    }
     return (
         <div>
             <p className='text-3xl mb-5 font-extrabold'>Payment Gateway</p>
