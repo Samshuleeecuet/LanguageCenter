@@ -9,9 +9,9 @@ import ServiceSection from './ServiceSection';
 const Home = () => {
     useDynamicTitle('Home')
     const { data: PopularInst = [],refetch,isLoading, isError, error } = useQuery({
-        queryKey: ['popularClass'],
+        queryKey: ['popularInst'],
         queryFn: async ()=>{
-            const response = await fetch(`https://languagecenter-server.vercel.app/popularinstructor`)
+            const response = await fetch('https://languagecenter-server.vercel.app/popularinstructor')
             return response.json()
         }
     })

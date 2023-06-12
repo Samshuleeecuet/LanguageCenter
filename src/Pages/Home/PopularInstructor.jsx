@@ -3,7 +3,7 @@ import { Fade, Slide } from "react-awesome-reveal";
 
 
 const PopularInstructor = ({PopularInst}) => {
-    
+    console.log(PopularInst)
     return (
         <div className='bg-green-300'>
             <div className='pt-10 pb-5 text-white text-center font-extrabold 
@@ -20,7 +20,7 @@ const PopularInstructor = ({PopularInst}) => {
                        <p className="card-title">
                         <p>Name: {pInstructor.name}</p>
                       </p>
-                        <p>Email: {pInstructor.email}</p>
+                        <p>Email:{pInstructor.email} </p>
                        </div></div>)
                     
                 }
