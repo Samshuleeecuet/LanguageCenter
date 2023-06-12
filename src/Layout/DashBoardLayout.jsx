@@ -25,10 +25,10 @@ const DashBoardLayout = () => {
             </div>
             <p className='font-medium text-center'>{user?.displayName}</p>
             <ul className="menu p-4 w-60 h-full  text-base-content">
+                <li className='mb-2'><NavLink className={({ isActive }) => (isActive ? 'active' : 'default')} to='/dashboard/mycart'><FaHome/>User Profile</NavLink></li>
                 
                 {
                     Admin && <>
-                    <li className='mb-2'><NavLink className={({ isActive }) => (isActive ? 'active' : 'default')} to='/dashboard/mycart'><FaHome/> Admin Home</NavLink></li>
                     <li className='mb-2'><NavLink className={({ isActive }) => (isActive ? 'active' : 'default')} to='/dashboard/allusers'><FaUser/> Manage Users </NavLink></li>
                     <li className='mb-2'><NavLink className={({ isActive }) => (isActive ? 'active' : 'default')} to='/dashboard/manageclasses'><FaCartPlus/> Manage Classes</NavLink></li>
                     </>

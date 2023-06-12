@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import useAdmin from '../Hooks/useAdmin';
 
-const Header = () => {
+const Header = ({handletheme,isLight}) => {
     const {user,logOut} = useContext(AuthContext);
     const [isAdmin] = useAdmin()
     const {Admin , Instructor ,Student} = isAdmin || [];
@@ -43,6 +43,7 @@ const Header = () => {
         {
             user && <div className="navbar-end mr-10">
             <div className='hidden lg:block'>
+            <button onClick={()=>handletheme(!isLight)} className='btn btn-circle mr-5' >{isLight? 'Light':'Dark'}</button>
             <Link onClick={logOut} className='font-medium tracking-wide text-white bg-green-500 transition-colors duration-200 btn btn-outline mr-4'>Log Out</Link>
             </div>
             <div className="avatar tooltip tooltip-bottom z-20" data-tip={user.displayName}>

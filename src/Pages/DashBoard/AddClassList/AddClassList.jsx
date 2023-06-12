@@ -8,10 +8,18 @@ const AddClassList = () => {
   const { data: classes = [],refetch,isLoading, isError, error } = useQuery({
     queryKey: ['classes'],
     queryFn: async ()=>{
-        const response = await fetch(`http://localhost:5000/instructorclasses/${user?.email}`)
+        const response = await fetch(`https://languagecenter-server.vercel.app/instructorclasses/${user?.email}`)
         return response.json()
     }
 })
+
+if(classes.length<1){
+    return(
+        <div>
+            <p className='font-bold text-3xl'>No Added Class Found</p>
+        </div>
+    )
+}
     return (
             <div className=' w-full'>
             <div className="overflow-x-auto">
@@ -25,6 +33,7 @@ const AddClassList = () => {
                     <th>Total Enrolled<br/>Students</th>
                     <th>Status</th>
                     <th>Feedback</th>
+                    <th>Update</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -53,6 +62,10 @@ const AddClassList = () => {
                                     <th>
                                         <div className='font-medium text-xs'>{eachClass.feedback}</div>
                                     </th>
+                                    <th>
+                                        <button className='btn btn-warning'>Update</button>
+                                    </th>
+
                         </tr>)
                     }
 

@@ -20,7 +20,7 @@ const CheckOut = ({price,cart,enrollstudent,availableseat}) => {
     console.log(price,cart.purchase)
     useEffect(()=>{
         if(price>0){
-            fetch('http://localhost:5000/create-payment-intent',{
+            fetch('https://languagecenter-server.vercel.app/create-payment-intent',{
                 method: 'POST',
                 headers:{
                 'content-type': 'application/json',
@@ -35,7 +35,7 @@ const CheckOut = ({price,cart,enrollstudent,availableseat}) => {
 
         }
         },[price])
-                // axios.post('http://localhost:5000/create-payment-intent',{price})
+                // axios.post('https://languagecenter-server.vercel.app/create-payment-intent',{price})
                 // .then(res=>{
                 //     console.log(res.data.clientSecret)
                 //     setClientSecret(res.data.clientSecret)
@@ -90,7 +90,7 @@ const CheckOut = ({price,cart,enrollstudent,availableseat}) => {
                 date: new Date(),
                 classId: cart.classId
             }
-            fetch('http://localhost:5000/payments',{
+            fetch('https://languagecenter-server.vercel.app/payments',{
                 method: 'POST',
                 headers:{
                 'content-type': 'application/json',
@@ -105,7 +105,7 @@ const CheckOut = ({price,cart,enrollstudent,availableseat}) => {
                     console.log('Payment Successfull')
                   }})
 
-                  fetch(`http://localhost:5000/carts/${cart.classId}`,{
+                  fetch(`https://languagecenter-server.vercel.app/carts/${cart.classId}`,{
                       method: 'PUT',
                       headers:{
                         'content-type': 'application/json',
@@ -116,7 +116,7 @@ const CheckOut = ({price,cart,enrollstudent,availableseat}) => {
                     .then(res=> res.json())
                     .then(data=> {
                       console.log('Cart Status Updated' ,data)
-                      fetch(`http://localhost:5000/updateclass/${cart.classId}`,{
+                      fetch(`https://languagecenter-server.vercel.app/updateclass/${cart.classId}`,{
                       method: 'PATCH',
                       headers:{
                         'content-type': 'application/json',
@@ -142,7 +142,7 @@ const CheckOut = ({price,cart,enrollstudent,availableseat}) => {
                     })})
 
                     
-            // axios.post('http://localhost:5000/payments',payment)
+            // axios.post('https://languagecenter-server.vercel.app/payments',payment)
             // .then(res=>{
             //     console.log(res.data);
             //     if(res.data.result.insertedId){

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useClasses from '../../../Hooks/DynamicTitle/useClasses';
 import EachClass from './EachClass';
 import Swal from 'sweetalert2';
+import { Slide } from 'react-awesome-reveal';
 
 const ManageClasses = () => {
     const [classes,refetch,] = useClasses();
@@ -9,7 +10,7 @@ const ManageClasses = () => {
     const [Idstatus,setIdstatus] = useState('')
     const handleApproved = (id,feedback) =>{
         const data = {status:'Approved',feedback: feedback}
-         fetch(`http://localhost:5000/classes?id=${id}`,{
+         fetch(`https://languagecenter-server.vercel.app/classes?id=${id}`,{
              method: 'PUT',
              headers: {
                  'Content-Type': 'application/json'
@@ -32,7 +33,7 @@ const ManageClasses = () => {
      }
      const handleDeny = (id,feedback) => {
         const data = {status:'Denied',feedback: feedback}
-         fetch(`http://localhost:5000/classes?id=${id} `,{
+         fetch(`https://languagecenter-server.vercel.app/classes?id=${id} `,{
              method: 'PUT',
              headers: {
                  'Content-Type': 'application/json'
@@ -64,7 +65,7 @@ const ManageClasses = () => {
             const form = e.target;
             const feedback = form.feedback.value;
             const data = {status: Idstatus,feedback: feedback}
-            fetch(`http://localhost:5000/classes?id=${FeedbackId}`,{
+            fetch(`https://languagecenter-server.vercel.app/classes?id=${FeedbackId}`,{
              method: 'PUT',
              headers: {
                  'Content-Type': 'application/json'
@@ -92,7 +93,8 @@ const ManageClasses = () => {
         </div>
      }
     return (
-        <div className='w-full'>
+        <Slide duration={1000}>
+            <div className='w-full'>
             <div className="overflow-x-auto">
             <table className="table">
                 {/* head */}
@@ -129,6 +131,7 @@ const ManageClasses = () => {
 
 
 </div>
+        </Slide>
     );
 };
 

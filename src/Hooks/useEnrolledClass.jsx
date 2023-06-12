@@ -9,7 +9,7 @@ const useEnrolledClass = () => {
     queryKey: ['enrollCart'],
     enabled: !loading,
     queryFn: async ()=>{
-        const response = await fetch(`http://localhost:5000/carts/?email=${user?.email}&purchase=true`,{
+        const response = await fetch(`https://languagecenter-server.vercel.app/carts/?email=${user?.email}&purchase=true`,{
             headers :{
                 authorization: `bearer ${token}`
             }

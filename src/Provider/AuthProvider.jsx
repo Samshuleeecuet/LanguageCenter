@@ -45,14 +45,14 @@ const AuthProvider = ({children}) => {
             console.log(loggedUser)
             //get and set token by AXIOS
             if(loggedUser){
-                    // fetch('http://localhost:5000/jwt',{
+                    // fetch('https://languagecenter-server.vercel.app/jwt',{
                     //     method: 'POST',
                     //     headers:{
                     //         'content-type': 'application/json'
                     //     },
                     //     body: JSON.stringify({email: loggedUser.email})
                     // })
-                 axios.post('http://localhost:5000/jwt',{email: loggedUser?.email})
+                 axios.post('https://languagecenter-server.vercel.app/jwt',{email: loggedUser?.email})
                 .then(data=> {
                     const token = data.data.token;
                     localStorage.setItem('access-token',token)

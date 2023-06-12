@@ -11,7 +11,7 @@ const AllClass = () => {
             const { data: classes = [],refetch,isLoading, isError, error } = useQuery({
             queryKey: ['classes'],
             queryFn: async ()=>{
-                const response = await fetch(`http://localhost:5000/allclasses`,{
+                const response = await fetch(`https://languagecenter-server.vercel.app/allclasses`,{
                   headers :{
                       authorization: `bearer ${token}`
           }
@@ -23,7 +23,7 @@ const AllClass = () => {
     const classId = data._id
     delete data._id;
     const token= localStorage.getItem("access-token")
-    fetch('http://localhost:5000/addtocart',{
+    fetch('https://languagecenter-server.vercel.app/addtocart',{
         method: 'POST',
         headers:{
             'content-type': 'application/json',

@@ -8,7 +8,7 @@ const useClasses = ()=>{
     queryKey: ['classes'],
     enabled: !loading,
     queryFn: async ()=>{
-        const response = await fetch(`http://localhost:5000/classes?email=${user?.email}`,{
+        const response = await fetch(`https://languagecenter-server.vercel.app/classes?email=${user?.email}`,{
           headers :{
               authorization: `bearer ${token}`
           }

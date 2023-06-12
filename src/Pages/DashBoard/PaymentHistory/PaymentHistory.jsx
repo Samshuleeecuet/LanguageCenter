@@ -6,6 +6,13 @@ const PaymentHistory = () => {
     const [historyCart,]= usePaymentHistory();
     useDynamicTitle('Payment')
     console.log(historyCart)
+    if(historyCart.length<1){
+        return(
+            <div>
+                <p className='font-bold text-3xl'>No Payment History Found</p>
+            </div>
+        )
+    }
     return (
         <div className='w-full ml-5'>
             <p className='text-center text-3xl font-bold mb-5 mt-5'>Payment History</p>

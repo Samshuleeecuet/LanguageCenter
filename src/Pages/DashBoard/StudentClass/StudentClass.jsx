@@ -11,7 +11,7 @@ const StudentClass = () => {
     const [carts,refetch] = useSelectedClass()
     
 const handleDelete = (id)=>{
-    fetch(`http://localhost:5000/carts/${id}`,{
+    fetch(`https://languagecenter-server.vercel.app/carts/${id}`,{
         method: 'DELETE'
     })
     .then(res=> res.json())
@@ -27,6 +27,13 @@ const handleDelete = (id)=>{
               })
         }
     })
+}
+if(carts.length<1){
+    return(
+        <div>
+            <p className='font-bold text-3xl'>No Selected Class Found</p>
+        </div>
+    )
 }
     return (
         <div className=' w-full'>

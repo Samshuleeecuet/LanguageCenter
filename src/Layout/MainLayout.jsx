@@ -7,10 +7,20 @@ import { InfinitySpin } from 'react-loader-spinner'
 
 const MainLayout = () => {
     const [Loader,setLoader]= useState(true);
-    
+    const [isLight,setisLight] = useState(true);
     setTimeout(()=>{
             setLoader(false)
     },'1000')
+    const handletheme = (Light)=>{
+        setisLight(Light)
+        console.log(Light)
+    }
+    const darkMode = {
+        backgroundColor: 'black'
+    }
+    const lightMode = {
+        backgroundColor: ''
+    }
     if(Loader){
         return <div className='lg:ml-[40%] lg:mt-[10%]'>
             <InfinitySpin 
@@ -22,11 +32,11 @@ const MainLayout = () => {
     }
     else{
         return (
-            <>
-            <Header/>
+            <div className={({ isLight }) => (isLight ? '' : 'bg-black')} >
+            <Header handletheme={handletheme} isLight={isLight}/>
             <Outlet/>
             <Footer/>
-            </>
+            </div>
         );
     }
 };

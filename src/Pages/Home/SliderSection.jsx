@@ -25,8 +25,8 @@ const SliderSection = () => {
         learn foreign language like German</p>
             <p className='btn btn-outline text-white'>Explore German</p>
                     </div>
-                    <div className='mt-10 mb-10 ml-10 lg:mr-10'>
-                        <ReactPlayer url='https://www.youtube.com/watch?v=5z-grdXP8B8' />
+                    <div className='mt-10 mb-10 ml-2 lg:ml-10 lg:mr-10'>
+                        <ReactPlayer url='https://www.youtube.com/watch?v=5z-grdXP8B8' width='300px'/>
                     </div>
             </div>
         </SwiperSlide>
@@ -37,8 +37,8 @@ const SliderSection = () => {
         learn foreign language like Korean</p>
             <p className='btn btn-outline text-white'>Explore Korean</p>
                     </div>
-                    <div className='mt-10 mr-10'>
-                        <ReactPlayer url='https://www.youtube.com/watch?v=Oj5ztfdXYuw' height='400px' />
+                    <div className='mt-10 mb-10 ml-2 lg:ml-10 lg:mr-10'>
+                        <ReactPlayer url='https://www.youtube.com/watch?v=Oj5ztfdXYuw' height='300px' />
                     </div>
             </div>
         </SwiperSlide>
@@ -49,8 +49,8 @@ const SliderSection = () => {
         learn foreign language like Japanies</p>
             <p className='btn btn-outline text-white'>Explore Japanies</p>
                     </div>
-                    <div className='mt-10 mr-10'>
-                        <ReactPlayer url='https://www.youtube.com/watch?v=d67SLbFMBUA' height='400px' />
+                    <div className='mt-10 mb-10 ml-2 lg:ml-10 lg:mr-10'>
+                        <ReactPlayer url='https://www.youtube.com/watch?v=d67SLbFMBUA' height='300px' />
                     </div>
             </div>
         </SwiperSlide>
@@ -61,8 +61,8 @@ const SliderSection = () => {
         learn foreign language like English</p>
             <p className='btn btn-outline text-white'>Explore English</p>
                     </div>
-                    <div className='mt-10 mr-10'>
-                        <ReactPlayer url='https://www.youtube.com/watch?v=9Fnzjvx5hkQ' height='400px' />
+                    <div className='mt-10 mb-10 ml-2 lg:ml-10 lg:mr-10'>
+                        <ReactPlayer url='https://www.youtube.com/watch?v=9Fnzjvx5hkQ' height='300px' />
                     </div>
             </div>
         </SwiperSlide>
@@ -73,8 +73,8 @@ const SliderSection = () => {
         learn foreign language like Norwegian</p>
             <p className='btn btn-outline text-white'>Explore Norwegian</p>
                     </div>
-                    <div className='mt-10 mr-10'>
-                        <ReactPlayer url='https://www.youtube.com/watch?v=pwi6wnt5rkA' height='400px' />
+                    <div className='mt-10 mb-10 ml-2 lg:ml-10 lg:mr-10'>
+                        <ReactPlayer url='https://www.youtube.com/watch?v=pwi6wnt5rkA' height='300px' />
                     </div>
             </div>
         </SwiperSlide>
@@ -85,8 +85,8 @@ const SliderSection = () => {
         learn foreign language like Swedish</p>
             <p className='btn btn-outline text-white'>Explore Swedish</p>
                     </div>
-                    <div className='mt-10 mr-10'>
-                        <ReactPlayer url='https://www.youtube.com/watch?v=ZHW05-05WFw' height='400px' />
+                    <div className='mt-10 mb-10 ml-2 lg:ml-10 lg:mr-10'>
+                        <ReactPlayer url='https://www.youtube.com/watch?v=ZHW05-05WFw' height='300px' />
                     </div>
             </div>
         </SwiperSlide>

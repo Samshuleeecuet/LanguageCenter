@@ -10,7 +10,7 @@ const useUsers = () => {
         queryKey: ['users',user?.email],
         enabled: !loading,
         queryFn: async ()=>{
-            const res = await fetch(`http://localhost:5000/users?email=${user?.email}`,{
+            const res = await fetch(`https://languagecenter-server.vercel.app/users?email=${user?.email}`,{
                 headers :{
                     authorization: `bearer ${token}`
                 }

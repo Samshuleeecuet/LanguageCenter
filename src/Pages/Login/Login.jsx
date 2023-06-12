@@ -37,7 +37,7 @@ const Login = () => {
         .then(result=>{
             const user = result.user;
             const userData = {email:user.email,name:user.displayName,photourl:user.photoURL,role:'Student'}
-            fetch(`http://localhost:5000/users`,
+            fetch(`https://languagecenter-server.vercel.app/users`,
             {
                 method: 'POST',
                 headers:{

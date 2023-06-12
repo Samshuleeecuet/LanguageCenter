@@ -16,7 +16,7 @@ const Payment = () => {
   const { data: carts = [],refetch,isLoading, isError, error } = useQuery({
     queryKey: ['cartspay'],
     queryFn: async ()=>{
-        const response = await fetch(`http://localhost:5000/cartspay/${classid}`,{
+        const response = await fetch(`https://languagecenter-server.vercel.app/cartspay/${classid}`,{
             headers :{
                 authorization: `bearer ${token}`
             }

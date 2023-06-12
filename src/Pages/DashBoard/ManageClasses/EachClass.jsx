@@ -3,9 +3,6 @@ import React, { useState } from 'react';
 
 const EachClass = ({eachclass,handleApproved,handleDeny,handleFeedback}) => {
     const {_id,classname,classimage,availableseat,enrollstudent,feedback,instructoremail,instructorname,price,status}= eachclass || {}
-    //console.log(eachclass)
-    
-    
 
     return (
         <tr>

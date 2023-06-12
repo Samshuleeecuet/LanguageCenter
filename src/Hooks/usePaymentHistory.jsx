@@ -8,7 +8,7 @@ const usePaymentHistory = () => {
   const { data: historyCart = [],refetch,isLoading, isError, error } = useQuery({
     queryKey: ['historyCart',user?.email],
     queryFn: async ()=>{
-        const response = await fetch(`http://localhost:5000/paymenthistory/${user?.email}`,{
+        const response = await fetch(`https://languagecenter-server.vercel.app/paymenthistory/${user?.email}`,{
             headers :{
                 authorization: `bearer ${token}`
             }

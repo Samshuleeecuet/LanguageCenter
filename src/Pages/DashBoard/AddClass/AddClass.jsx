@@ -13,7 +13,7 @@ const AddClass = () => {
         formData.instructorimage = user.photoURL
         formData.enrollstudent = '0'
         formData.feedback = ''
-            fetch(`http://localhost:5000/classes`,
+            fetch(`https://languagecenter-server.vercel.app/classes`,
             {
                 method: 'POST',
                 headers:{

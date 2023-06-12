@@ -3,6 +3,7 @@ import useUsers from '../../../Hooks/DynamicTitle/useUsers';
 import useDynamicTitle from '../../../Hooks/DynamicTitle/useDynamicTitle';
 import { FaTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import { Slide } from 'react-awesome-reveal';
 
 const ManageUsers = () => {
     const [users,refetch,] = useUsers()
@@ -11,7 +12,7 @@ const ManageUsers = () => {
     //console.log(users)
     const handleRole = (id,role)=>{
         console.log(id,role)
-        fetch(`http://localhost:5000/users/admin?id=${id}&role=${role}`,{
+        fetch(`https://languagecenter-server.vercel.app/users/admin?id=${id}&role=${role}`,{
             method: 'PATCH'
         })
         .then(res=> res.json())
@@ -31,10 +32,27 @@ const ManageUsers = () => {
 
     // TO DO delete user
     const handleDelete = id =>{
-        console.log(id)
+        fetch(`https://languagecenter-server.vercel.app/deleteuser/${id}`,{
+            method: 'DELETE'
+        })
+        .then(res=> res.json())
+        .then(data=>{
+            console.log(data)
+            if(data.deletedCount === 1){
+                refetch()
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: `User Deleted Successfully`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+            }
+        })
     }
     return (
-        <div className=' w-full'>
+        <Slide duration={1000}>
+            <div className=' w-full'>
             <div className="overflow-x-auto">
             <table className="table">
                 {/* head */}
@@ -92,6 +110,7 @@ const ManageUsers = () => {
             </table>
             </div>
         </div>
+        </Slide>
     );
 };
 

@@ -9,7 +9,7 @@ const useAdmin = () => {
     const {data: isAdmin,isAdminLoading}= useQuery({
         queryKey: ['isAdmin',user?.email],
         queryFn: async ()=>{
-            const response = await fetch(`http://localhost:5000/users/admin/${user?.email}`,{
+            const response = await fetch(`https://languagecenter-server.vercel.app/users/admin/${user?.email}`,{
                 headers :{
                     authorization: `bearer ${token}`
                 }

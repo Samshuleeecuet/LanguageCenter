@@ -42,7 +42,7 @@ const Register = () => {
             const user = result.user;
             updateUserProfile(user,data.name,data.photourl)
             const userData = {email:data.email,name:data.name,photourl:data.photourl,role:'Student'}
-            fetch(`http://localhost:5000/users`,
+            fetch(`https://languagecenter-server.vercel.app/users`,
             {
                 method: 'POST',
                 headers:{

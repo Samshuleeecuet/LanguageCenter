@@ -8,7 +8,7 @@ const useSelectedClass = () => {
     queryKey: ['carts'],
     enabled: !loading,
     queryFn: async ()=>{
-        const response = await fetch(`http://localhost:5000/carts/?email=${user?.email}&purchase=false`,{
+        const response = await fetch(`https://languagecenter-server.vercel.app/carts/?email=${user?.email}&purchase=false`,{
             headers :{
                 authorization: `bearer ${token}`
             }

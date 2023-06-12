@@ -6,7 +6,7 @@ const useUpdateClass = (classid) => {
   const { data: updatedCart = [],refetch,isLoading, isError, error } = useQuery({
     queryKey: ['updatedCart'],
     queryFn: async ()=>{
-        const response = await fetch(`http://localhost:5000/updateclass/${classid}`,{
+        const response = await fetch(`https://languagecenter-server.vercel.app/updateclass/${classid}`,{
             headers :{
                 authorization: `bearer ${token}`
             }
