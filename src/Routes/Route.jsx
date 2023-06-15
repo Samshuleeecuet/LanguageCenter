@@ -17,6 +17,8 @@ import AllClass from "../Pages/AllClass/AllClass";
 import StudentClass from "../Pages/DashBoard/StudentClass/StudentClass";
 import EnrollClass from "../Pages/DashBoard/EnrollClass/EnrollClass";
 import Payment from "../Pages/DashBoard/Payment/Payment";
+import InstructorRoute from "./InstructorRoute";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
     {
@@ -60,11 +62,11 @@ const router = createBrowserRouter([
             },
             {
                 path: 'allusers',
-                element:<ManageUsers/>
+                element:<AdminRoute><ManageUsers/></AdminRoute>
             },
             {
                 path: 'addclass',
-                element:<AddClass/>
+                element:<InstructorRoute><AddClass/></InstructorRoute>
             },
             {
                 path: 'manageclasses',
