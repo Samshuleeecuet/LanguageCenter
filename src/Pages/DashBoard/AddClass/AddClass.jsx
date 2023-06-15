@@ -3,17 +3,32 @@ import { useForm } from "react-hook-form";
 import useClasses from '../../../Hooks/DynamicTitle/useClasses';
 import { AuthContext } from '../../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
+import { data } from 'autoprefixer';
+const img_hosting_token = import.meta.env.VITE_Image_Upload;
 const AddClass = () => {
     const {user} = useContext(AuthContext)
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [, refetch,]= useClasses()
+    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
     const onSubmit = formData => {
         formData.status = 'pending'
-        formData.price = parseInt(formData.price)
+        formData.price = parseFloat(formData.price)
         formData.instructorimage = user.photoURL
-        formData.enrollstudent = '0'
+        formData.enrollstudent = 0
         formData.feedback = ''
-            fetch(`https://languagecenter-server.vercel.app/classes`,
+
+        const formdata = new FormData();
+        formdata.append('image',formData.classimage[0])
+        fetch(img_hosting_url,{
+            method: 'POST',
+            body: formdata
+        })
+        .then(res=>res.json())
+        .then(imgdata => {
+            if(imgdata.success){
+                const imgURL = imgdata.data.display_url;
+                formData.classimage = imgURL;
+                fetch(`https://languagecenter-server.vercel.app/classes`,
             {
                 method: 'POST',
                 headers:{
@@ -34,6 +49,9 @@ const AddClass = () => {
                       })
                 }
             })
+            }
+        })
+            
     }
     return (
         <div className='min-h-screen'>
@@ -42,7 +60,7 @@ const AddClass = () => {
                
                <input className='border rounded-lg h-12 w-96 pl-4 mb-4 border-green-400' defaultValue="" type='text' placeholder='Enter Class Name' {...register("classname",{required: true})} required/>
                <br/>
-               <input className='border rounded-lg h-12 w-96 pl-4 mb-4 border-green-400' defaultValue="" type='text' placeholder='Enter Class Image' {...register("classimage",{required: true})} required/>
+               <input className='file-input file-input-bordered h-12 w-96 mb-4 border-green-400' defaultValue="" type='file' placeholder='Enter Class Image' {...register("classimage",{required: true})} required/>
                <br/>
                <input className='border rounded-lg h-12 w-96 pl-4 mb-4 border-green-400' value={user?.displayName} type='text' placeholder='Enter Instructor Name' {...register("instructorname")} required/>
                <br/>
