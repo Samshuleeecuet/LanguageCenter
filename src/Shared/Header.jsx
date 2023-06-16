@@ -23,7 +23,7 @@ const Header = ({handletheme,isLight}) => {
     
     </>
     return (
-        <div className="navbar font-mono bg-green-900 text-white border-b-4 border-b-green-900">
+        <div className={`navbar font-mono ${isLight? 'bg-green-900':'bg-black border-b-black'} text-white border-b-4 border-b-green-900`} >
         <div className="navbar-start">
             <div className="dropdown z-30">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">

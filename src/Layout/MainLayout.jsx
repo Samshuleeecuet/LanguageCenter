@@ -4,7 +4,6 @@ import { Outlet } from 'react-router-dom';
 import Footer from '../Shared/Footer';
 import { InfinitySpin } from 'react-loader-spinner'
 
-
 const MainLayout = () => {
     const [Loader,setLoader]= useState(true);
     const [isLight,setisLight] = useState(true);
@@ -13,14 +12,8 @@ const MainLayout = () => {
     },'1000')
     const handletheme = (Light)=>{
         setisLight(Light)
-        console.log(Light)
     }
-    const darkMode = {
-        backgroundColor: 'black'
-    }
-    const lightMode = {
-        backgroundColor: ''
-    }
+
     if(Loader){
         return <div className='lg:ml-[40%] lg:mt-[10%]'>
             <InfinitySpin 
@@ -32,7 +25,7 @@ const MainLayout = () => {
     }
     else{
         return (
-            <div className={({ isLight }) => (isLight ? '' : 'bg-black')} >
+            <div className={`${isLight? 'bg-green-700':'bg-black'}`}>
             <Header handletheme={handletheme} isLight={isLight}/>
             <Outlet/>
             <Footer/>

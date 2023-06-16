@@ -5,11 +5,7 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      backgroundImage: {
-        'swipper-bg': "url('/public/swiperbg.svg')"
-      }
-    },
+    themes: ["light", "dark"]
   },
   plugins: [require("daisyui")],
 }

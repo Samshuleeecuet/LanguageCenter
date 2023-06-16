@@ -9,3 +9,4 @@
 .default{
   @apply font-medium  bg-green-800 tracking-wide text-white transition-colors duration-200 hover:bg-green-600
 }
+

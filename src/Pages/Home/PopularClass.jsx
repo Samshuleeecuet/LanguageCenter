@@ -12,7 +12,7 @@ const PopularClass = () => {
     })
 
     return (
-        <div className='bg-green-300'>
+        <div>
             <div className='pt-10 pb-5 text-white text-center font-extrabold    text-2xl lg:text-5xl'>
                 <p>Our Popular Classes</p>
             </div>
